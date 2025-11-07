@@ -20,7 +20,7 @@ class AuthUseCase {
       throw new EmployeeNotFound();
     }
 
-    const pwd_is_match = await comparePwd(data.password, user.password);
+    const pwd_is_match = await comparePwd(data.password, user.hashPwd);
 
     if (!pwd_is_match) {
       throw new PasswordNotMatch();

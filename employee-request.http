@@ -1,0 +1,19 @@
+# POST http://localhost/api/employee/register
+# Content-Type: application/json
+
+# {
+# 	"name": "Thuanny Doe",
+# 	"cpf": "00000000002",
+# 	"email": "thuanny@lanhouse.com",
+# 	"password": "12345678",
+# 	"confirm": "12345678"
+# }
+
+GET http://localhost/api/employee/profile
+Cookie: accessToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOnsiaWQiOjEsIm5hbWUiOiJUaHVhbm55IERvZSIsImVtYWlsIjoidGh1YW5ueUBsYW5ob3VzZS5jb20ifSwiaWF0IjoxNzYyNDkyOTk5LCJleHAiOjE3NjI0OTY1OTl9.Tsn08BgszMy61VSZgkrTpT4mfPMDx0Z37gccTobeyKk
+
+
+
+# GET http://localhost/api/employee/internal/credentials?email=thuanny@lanhouse.com
+# Content-Type: application/json
+# x-internal-token: 5f7a4d0cbd3f24a92e3a18d2e0b7f8c913b9a8c6487a22e1efc4d6e9312b8a6f
