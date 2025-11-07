@@ -1,3 +1,5 @@
+const { EmployeeDoesntExists } = require("../http/errors/ProfileErrorHandle");
+
 class ProfileUseCase {
   #employeePrismaRepository;
 
@@ -5,5 +7,15 @@ class ProfileUseCase {
     this.#employeePrismaRepository = employeePrismaRepository;
   }
 
-  async exec() {}
+  async exec(data) {
+    const user = await this.#employeePrismaRepository.findById({ id: data.id });
+
+    if (!user) {
+      throw new EmployeeDoesntExists();
+    }
+
+    return { user };
+  }
 }
+
+module.exports = { ProfileUseCase };

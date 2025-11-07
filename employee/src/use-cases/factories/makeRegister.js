@@ -1,8 +1,8 @@
 const { RegisterUseCase } = require("../RegisterUseCase");
 
-function MakeRegister(userPrismaFactory) {
-  const userRepos = userPrismaFactory.createRepository();
-  const register = new RegisterUseCase(userRepos);
+function MakeRegister(employeePrismaFactory) {
+  const employeeRepos = employeePrismaFactory.createRepository();
+  const register = new RegisterUseCase(employeeRepos);
 
   return register;
 }

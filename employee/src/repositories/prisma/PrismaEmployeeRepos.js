@@ -29,21 +29,40 @@ class PrismaEmployeeRepos {
     }
   }
 
-  async findByEmail(value) {
-    //Procura o usuário através do e-mail
-    const employee = await prisma.employee.findUnique({
-      where: {
-        email: value.email,
-      },
-      select: {
-        id: true,
-        name: true,
-        email: true,
-        password: true,
-      },
-    });
+  async findById(value) {
+    try {
+      //Procura o usuário através do id
+      const employee = await prisma.employee.findUnique({
+        where: {
+          id: value.id,
+        },
+      });
 
-    return employee;
+      return employee;
+    } catch (err) {
+      console.error(err);
+    }
+  }
+
+  async findByEmail(value) {
+    try {
+      //Procura o usuário através do e-mail
+      const employee = await prisma.employee.findUnique({
+        where: {
+          email: value.email,
+        },
+        select: {
+          id: true,
+          name: true,
+          email: true,
+          password: true,
+        },
+      });
+
+      return employee;
+    } catch (err) {
+      console.error(err);
+    }
   }
 }
 

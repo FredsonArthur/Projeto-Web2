@@ -1,8 +1,8 @@
 const { CredentialsUseCase } = require("../CredentialsUseCase");
 
-function MakeCredentials(userPrismaFactory) {
-  const userRepos = userPrismaFactory.createRepository();
-  const crendentials = new CredentialsUseCase(userRepos);
+function MakeCredentials(employeePrismaFactory) {
+  const employeeRepos = employeePrismaFactory.createRepository();
+  const crendentials = new CredentialsUseCase(employeeRepos);
 
   return crendentials;
 }
