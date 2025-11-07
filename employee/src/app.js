@@ -1,12 +1,11 @@
 const express = require("express");
 const app = express();
+const { EmployeeRoutes } = require("./http/controllers/routes");
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-app.get("/employee", (req, res) => {
-  res.send("Olá do employee");
-});
+app.use("/api/employee", EmployeeRoutes);
 
 app.use((req, res, next) => {
   res.status(404).json({

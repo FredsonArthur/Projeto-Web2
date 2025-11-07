@@ -1,7 +1,7 @@
 const { registerSchema } = require("../schemas/RegisterSchema");
 const {
-  UserPrismaFactory,
-} = require("../../repositories/prisma/UserPrismaRepository");
+  PrismaEmployeeFactory,
+} = require("../../repositories/prisma/PrismaEmployeeRepos");
 
 const { MakeRegister } = require("../../use-cases/factories/makeRegister");
 
@@ -9,7 +9,7 @@ async function RegisterController(req, res) {
   try {
     const { name, cpf, email, password } = registerSchema.parse(req.body);
 
-    const repoFactory = new UserPrismaFactory();
+    const repoFactory = new PrismaEmployeeFactory();
     const registerFactory = MakeRegister(repoFactory);
 
     // Registra os dados requisitados pelo usuário no frontend

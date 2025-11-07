@@ -90,3 +90,6 @@ Thumbs.db
 ehthumbs.db
 
 /src/generated/prisma
+
+/src/generated/prisma
+/prisma/migrations

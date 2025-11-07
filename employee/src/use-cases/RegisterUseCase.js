@@ -1,17 +1,17 @@
 const { hashPwd } = require("../utils/hashPwd");
 
 class RegisterUseCase {
-  #userPrismaRepository;
+  #employeePrismaRepository;
 
-  constructor(userPrismaRepository) {
-    this.#userPrismaRepository = userPrismaRepository;
+  constructor(employeePrismaRepository) {
+    this.#employeePrismaRepository = employeePrismaRepository;
   }
 
   async exec(data) {
     // Verifica se o usuário existe através do CPF
-    const userAlreadyExists = await this.#userPrismaRepository.findByCPF(
-      data.cpf
-    );
+    const userAlreadyExists = await this.#employeePrismaRepository.findByCPF({
+      cpf: data.cpf,
+    });
 
     // Se já existe, retorna o erro.
     if (userAlreadyExists) {
@@ -22,7 +22,7 @@ class RegisterUseCase {
     const hashedPwd = await hashPwd(data.password);
 
     // Salva os dados (incluindo a senha criptografada) no banco de dados
-    const user = await this.#userPrismaRepository.save({
+    const user = await this.#employeePrismaRepository.save({
       ...data,
       password: hashedPwd,
     });
