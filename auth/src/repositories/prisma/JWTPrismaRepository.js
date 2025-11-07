@@ -31,7 +31,7 @@ class JWTPrismaRepository {
      * caso seja, retorna os dados do usuário.
      * */
     try {
-      const user = await employeeAPI.findEmail(value);
+      const user = await employeeAPI.findEmail(value.email);
 
       if (!user) return null;
 
