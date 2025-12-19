@@ -1,0 +1,69 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Customers {
+  id        Int            @id @default(autoincrement())
+  name      String
+  email     String         @unique
+  status    CustomerStatus @default(ACTIVE)
+  hireDate  DateTime       @default(now())
+  profileId Int?           @unique
+  createdAt DateTime       @default(now())
+  updatedAt DateTime       @updatedAt
+
+  profile Profile? @relation(fields: [profileId], references: [id])
+
+  sessions CustomerSession[]
+
+  transactions PaymentTransaction[]
+}
+
+model Profile {
+  id        Int       @id @default(autoincrement())
+  telephone String?   @unique
+  address   String?
+  birthDate DateTime?
+  avatarUrl String?
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+
+  customer Customers?
+}
+
+model CustomerSession {
+  id         Int       @id @default(autoincrement())
+  customerId Int
+  machineId  Int // vindo do microserviço de máquinas
+  startTime  DateTime  @default(now())
+  endTime    DateTime?
+  totalCost  Float     @default(0)
+
+  customer Customers @relation(fields: [customerId], references: [id])
+}
+
+model PaymentTransaction {
+  id         Int             @id @default(autoincrement())
+  customerId Int
+  amount     Decimal
+  type       TransactionType
+  createdAt  DateTime        @default(now())
+
+  customer Customers @relation(fields: [customerId], references: [id])
+}
+
+enum TransactionType {
+  CREDIT
+  DEBIT
+}
+
+enum CustomerStatus {
+  ACTIVE
+  INACTIVE
+  BANNED
+}
